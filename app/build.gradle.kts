@@ -4,6 +4,7 @@ plugins {
     id("kotlin-kapt")
     id("com.google.devtools.ksp")
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -39,6 +40,7 @@ android {
 
     buildFeatures{
         dataBinding = true
+        viewBinding = true
     }
 }
 
@@ -57,8 +59,9 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 
     //room
+    implementation("androidx.room:room-ktx:$roomVersion")
     implementation("androidx.room:room-runtime:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
