@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -44,6 +45,14 @@ class EditTaskFragment : Fragment() {
         initListeners()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        val types = resources.getStringArray(R.array.types)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_type_item, types)
+        binding.tvType.setAdapter(arrayAdapter)
+    }
+
     private fun initListeners() {
         binding.fabConfirm.setOnClickListener {
             if(editTask()) this.findNavController().popBackStack(R.id.taskListFragment, false)
@@ -63,13 +72,14 @@ class EditTaskFragment : Fragment() {
         var isTaskEdited = false
         val taskTitle = binding.etTitle.text.trim()
         val taskDescription = binding.etDescription.text.trim()
+        val taskType = binding.tvType.text.trim()
 
         if(taskTitle.isNotEmpty()) {
             val task = Task(
                 id = currentTask.id,
                 title = taskTitle.toString(),
                 description = taskDescription.toString(),
-                type = ""
+                type = taskType.toString()
             )
             taskViewModel.updateTask(task = task)
             isTaskEdited = true

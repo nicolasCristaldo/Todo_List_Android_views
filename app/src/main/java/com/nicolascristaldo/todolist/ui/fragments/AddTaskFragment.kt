@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
 import com.nicolascristaldo.todolist.R
 import com.nicolascristaldo.todolist.databinding.FragmentAddTaskBinding
 import com.nicolascristaldo.todolist.model.Task
@@ -36,6 +36,14 @@ class AddTaskFragment : Fragment() {
         initListeners()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        val types = resources.getStringArray(R.array.types)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_type_item, types)
+        binding.tvType.setAdapter(arrayAdapter)
+    }
+
     private fun initListeners() {
         binding.fabConfirm.setOnClickListener {
             if(saveTask()) it.findNavController().popBackStack(R.id.taskListFragment, false)
@@ -46,12 +54,13 @@ class AddTaskFragment : Fragment() {
         var isTaskSaved = false
         val taskTitle = binding.etTitle.text.trim()
         val taskDescription = binding.etDescription.text.trim()
+        val taskType = binding.tvType.text.trim()
 
         if(taskTitle.isNotEmpty()) {
             val task = Task(
                 title = taskTitle.toString(),
                 description = taskDescription.toString(),
-                type = ""
+                type = taskType.toString()
             )
             taskViewModel.insertTask(task)
             isTaskSaved = true
