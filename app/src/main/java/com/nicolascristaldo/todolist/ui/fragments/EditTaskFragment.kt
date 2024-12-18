@@ -1,60 +1,104 @@
 package com.nicolascristaldo.todolist.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.nicolascristaldo.todolist.R
+import com.nicolascristaldo.todolist.databinding.FragmentEditTaskBinding
+import com.nicolascristaldo.todolist.model.Task
+import com.nicolascristaldo.todolist.ui.MainActivity
+import com.nicolascristaldo.todolist.ui.viewmodel.TaskViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [EditTaskFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class EditTaskFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentEditTaskBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var taskViewModel: TaskViewModel
+
+    private lateinit var currentTask: Task
+
+    private val args: EditTaskFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_task, container, false)
+    ): View {
+        _binding = FragmentEditTaskBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EditTaskFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EditTaskFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        taskViewModel = (activity as MainActivity).taskViewModel
+        currentTask = args.task
+
+        initUI()
+        initListeners()
+    }
+
+    private fun initListeners() {
+        binding.fabConfirm.setOnClickListener {
+            if(editTask()) this.findNavController().popBackStack(R.id.taskListFragment, false)
+        }
+
+        binding.btnDelete.setOnClickListener {
+            deleteTask()
+        }
+    }
+
+    private fun initUI() {
+        binding.etTitle.setText(currentTask.title)
+        binding.etDescription.setText(currentTask.description)
+    }
+
+    private fun editTask(): Boolean {
+        var isTaskEdited = false
+        val taskTitle = binding.etTitle.text.trim()
+        val taskDescription = binding.etDescription.text.trim()
+
+        if(taskTitle.isNotEmpty()) {
+            val task = Task(
+                id = currentTask.id,
+                title = taskTitle.toString(),
+                description = taskDescription.toString(),
+                type = ""
+            )
+            taskViewModel.updateTask(task = task)
+            isTaskEdited = true
+            Toast.makeText(this.context, "Task edited", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            Toast.makeText(this.context, "Please enter note title", Toast.LENGTH_SHORT).show()
+        }
+
+        return isTaskEdited
+    }
+
+    private fun deleteTask() {
+        activity?.let {
+            AlertDialog.Builder(it).apply {
+                setTitle("Delete task")
+                setMessage("Do you want to delete this task?")
+                setPositiveButton("Delete") { _,_ ->
+                    taskViewModel.deleteTask(currentTask)
+                    view?.findNavController()?.popBackStack(R.id.taskListFragment, false)
+                    Toast.makeText(context, "The task has been deleted", Toast.LENGTH_SHORT).show()
                 }
-            }
+                setNegativeButton("Cancel", null)
+            }.create().show()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

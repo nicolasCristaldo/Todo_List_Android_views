@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import com.nicolascristaldo.todolist.R
 import com.nicolascristaldo.todolist.databinding.FragmentAddTaskBinding
 import com.nicolascristaldo.todolist.model.Task
@@ -32,13 +33,17 @@ class AddTaskFragment : Fragment() {
 
         taskViewModel = (activity as MainActivity).taskViewModel
 
+        initListeners()
+    }
+
+    private fun initListeners() {
         binding.fabConfirm.setOnClickListener {
-            if(saveNote()) it.findNavController().popBackStack(R.id.taskListFragment, false)
+            if(saveTask()) it.findNavController().popBackStack(R.id.taskListFragment, false)
         }
     }
 
-    private fun saveNote(): Boolean {
-        var isNoteSaved = true
+    private fun saveTask(): Boolean {
+        var isTaskSaved = false
         val taskTitle = binding.etTitle.text.trim()
         val taskDescription = binding.etDescription.text.trim()
 
@@ -49,13 +54,13 @@ class AddTaskFragment : Fragment() {
                 type = ""
             )
             taskViewModel.insertTask(task)
+            isTaskSaved = true
             Toast.makeText(this.context, "Task saved", Toast.LENGTH_SHORT).show()
         }
         else {
-            isNoteSaved = false
             Toast.makeText(this.context, "Please enter note title", Toast.LENGTH_SHORT).show()
         }
-        return isNoteSaved
+        return isTaskSaved
     }
 
     override fun onDestroy() {
