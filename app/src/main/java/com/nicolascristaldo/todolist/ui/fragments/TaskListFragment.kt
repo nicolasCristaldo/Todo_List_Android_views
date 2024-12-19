@@ -38,6 +38,10 @@ class TaskListFragment : Fragment() {
         taskViewModel = (activity as MainActivity).taskViewModel
         setupHomeRecyclerView()
 
+        initListeners()
+    }
+
+    private fun initListeners() {
         binding.fabAddTask.setOnClickListener {
             it.findNavController().navigate(R.id.action_taskListFragment_to_addTaskFragment)
         }

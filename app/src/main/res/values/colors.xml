@@ -4,4 +4,11 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="delete_background">#E06565</color>
+
+    <color name="personal_color">#0A66C8</color>
+    <color name="business_color">#DB8D1A</color>
+    <color name="home_color">#13A91A</color>
+    <color name="job_color">#D90E0E</color>
+    <color name="social_color">#A41CBC</color>
+    <color name="other_color">#716F6F</color>
 </resources>

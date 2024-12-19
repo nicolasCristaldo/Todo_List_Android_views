@@ -5,6 +5,9 @@
 
     <string-array name="types">
         <item>Personal</item>
+        <item>Home</item>
+        <item>Job</item>
+        <item>Social</item>
         <item>Business</item>
         <item>Other</item>
     </string-array>

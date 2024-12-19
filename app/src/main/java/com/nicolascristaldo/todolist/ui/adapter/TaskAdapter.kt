@@ -1,7 +1,9 @@
 package com.nicolascristaldo.todolist.ui.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.ColorRes
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nicolascristaldo.todolist.databinding.ItemTaskBinding
 import com.nicolascristaldo.todolist.model.Task
 import com.nicolascristaldo.todolist.ui.fragments.TaskListFragmentDirections
+import com.nicolascristaldo.todolist.ui.providers.TaskTypeProvider
 
 class TaskAdapter: RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     class TaskViewHolder(val taskBinding: ItemTaskBinding): RecyclerView.ViewHolder(taskBinding.root)
@@ -38,9 +41,13 @@ class TaskAdapter: RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val currentTask = differ.currentList[position]
+        val context =  holder.taskBinding.card.context
+        val color = context.getColor(TaskTypeProvider().getTypeColor(currentTask.type))
+
         holder.taskBinding.tvTitle.text = currentTask.title
         holder.taskBinding.tvType.text = currentTask.type
         holder.taskBinding.tvDescription.text = currentTask.description
+        holder.taskBinding.card.setCardBackgroundColor(color)
 
         holder.itemView.setOnClickListener {
             val direction = TaskListFragmentDirections.actionTaskListFragmentToEditTaskFragment(currentTask)
