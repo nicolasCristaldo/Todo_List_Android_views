@@ -42,7 +42,7 @@ class TaskListFragment : Fragment() {
     }
 
     private fun initListeners() {
-        binding.fabAddTask.setOnClickListener {
+        binding.btnAddTask.setOnClickListener {
             it.findNavController().navigate(R.id.action_taskListFragment_to_addTaskFragment)
         }
     }

@@ -45,7 +45,7 @@ class AddTaskFragment : Fragment() {
     }
 
     private fun initListeners() {
-        binding.fabConfirm.setOnClickListener {
+        binding.btnConfirm.setOnClickListener {
             if(saveTask()) it.findNavController().popBackStack(R.id.taskListFragment, false)
         }
     }

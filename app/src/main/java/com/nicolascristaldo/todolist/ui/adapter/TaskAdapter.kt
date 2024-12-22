@@ -1,5 +1,6 @@
 package com.nicolascristaldo.todolist.ui.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -39,15 +40,17 @@ class TaskAdapter: RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     override fun getItemCount(): Int = differ.currentList.size
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val currentTask = differ.currentList[position]
         val context =  holder.taskBinding.card.context
-        val color = context.getColor(TaskTypeProvider().getTypeColor(currentTask.type))
+        val color = context.getColor(TaskTypeProvider().getTypeColor(currentTask.type).color)
+        val icon = context.getDrawable(TaskTypeProvider().getTypeColor(currentTask.type).icon)
 
         holder.taskBinding.tvTitle.text = currentTask.title
-        holder.taskBinding.tvType.text = currentTask.type
         holder.taskBinding.tvDescription.text = currentTask.description
         holder.taskBinding.card.setCardBackgroundColor(color)
+        holder.taskBinding.ivTaskIcon.setImageDrawable(icon)
 
         holder.itemView.setOnClickListener {
             val direction = TaskListFragmentDirections.actionTaskListFragmentToEditTaskFragment(currentTask)

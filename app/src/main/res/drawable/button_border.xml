@@ -3,7 +3,7 @@
 
     <item>
         <shape android:shape="oval">
-            <solid android:color="@color/delete_background"/>
+            <solid android:color="@color/button_background"/>
         </shape>
     </item>
 

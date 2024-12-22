@@ -2,7 +2,7 @@
     android:id="@+id/typeItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    style="@style/Body"
     android:text="textview"
-    android:textSize="16dp"
     android:padding="12dp"
     xmlns:android="http://schemas.android.com/apk/res/android" />

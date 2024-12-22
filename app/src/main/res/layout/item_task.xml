@@ -11,6 +11,15 @@
         app:cardCornerRadius="12dp"
         app:cardElevation="8dp">
 
+        <ImageView
+            android:id="@+id/ivTaskIcon"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            tools:src="@drawable/ic_personal"
+            app:tint="@color/task_icon_color"
+            android:rotation="30"
+            android:layout_gravity="end|center_vertical"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,19 +30,16 @@
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="title" />
+                android:gravity="center_horizontal"
+                tools:text="title"
+                style="@style/Title_card"/>
 
             <TextView
                 android:id="@+id/tvDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="description" />
-
-            <TextView
-                android:id="@+id/tvType"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="type" />
+                tools:text="description"
+                style="@style/Body"/>
 
         </LinearLayout>
 

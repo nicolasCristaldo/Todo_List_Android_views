@@ -29,9 +29,9 @@
             android:id="@+id/etTitle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:maxLines="1"
-            android:maxLength="25"/>
+            android:maxLength="25"
+            style="@style/Body"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,6 +52,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Personal"
+            style="@style/Body"
             android:inputType="none"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -70,17 +71,20 @@
             android:id="@+id/etDescription"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            style="@style/Body"
             android:maxLines="18"
             android:maxLength="150"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabConfirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/btnConfirm"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/ic_add_task"/>
+        android:src="@drawable/ic_add_task"
+        android:background="@drawable/button_border"
+        app:tint="@color/button_icon_color"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

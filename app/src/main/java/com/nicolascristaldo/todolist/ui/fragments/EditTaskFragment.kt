@@ -54,7 +54,7 @@ class EditTaskFragment : Fragment() {
     }
 
     private fun initListeners() {
-        binding.fabConfirm.setOnClickListener {
+        binding.btnConfirm.setOnClickListener {
             if(editTask()) this.findNavController().popBackStack(R.id.taskListFragment, false)
         }
 
@@ -66,6 +66,7 @@ class EditTaskFragment : Fragment() {
     private fun initUI() {
         binding.etTitle.setText(currentTask.title)
         binding.etDescription.setText(currentTask.description)
+        binding.tvType.setText(currentTask.type)
     }
 
     private fun editTask(): Boolean {
