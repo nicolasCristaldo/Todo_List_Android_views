@@ -1,6 +1,8 @@
 <resources>
     <color name="task_icon_color">#80000000</color>
 
+    <color name="toolbar_color">#3D089B</color>
+
     <color name="delete_background">#810404</color>
     <color name="button_background">#5617C5</color>
     <color name="button_icon_color">#E2E0E0</color>

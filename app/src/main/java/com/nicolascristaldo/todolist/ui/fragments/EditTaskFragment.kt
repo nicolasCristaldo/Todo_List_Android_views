@@ -55,7 +55,7 @@ class EditTaskFragment : Fragment() {
 
     private fun initListeners() {
         binding.btnConfirm.setOnClickListener {
-            if(editTask()) this.findNavController().popBackStack(R.id.taskListFragment, false)
+            if (editTask()) this.findNavController().popBackStack(R.id.taskListFragment, false)
         }
 
         binding.btnDelete.setOnClickListener {
@@ -75,7 +75,7 @@ class EditTaskFragment : Fragment() {
         val taskDescription = binding.etDescription.text.trim()
         val taskType = binding.tvType.text.trim()
 
-        if(taskTitle.isNotEmpty()) {
+        if (taskTitle.isNotEmpty()) {
             val task = Task(
                 id = currentTask.id,
                 title = taskTitle.toString(),
@@ -84,10 +84,11 @@ class EditTaskFragment : Fragment() {
             )
             taskViewModel.updateTask(task = task)
             isTaskEdited = true
-            Toast.makeText(this.context, "Task edited", Toast.LENGTH_SHORT).show()
-        }
-        else {
-            Toast.makeText(this.context, "Please enter note title", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this.context, this.getString(R.string.task_edited), Toast.LENGTH_SHORT)
+                .show()
+        } else {
+            Toast.makeText(this.context, this.getString(R.string.enter_title), Toast.LENGTH_SHORT)
+                .show()
         }
 
         return isTaskEdited
@@ -96,14 +97,15 @@ class EditTaskFragment : Fragment() {
     private fun deleteTask() {
         activity?.let {
             AlertDialog.Builder(it).apply {
-                setTitle("Delete task")
-                setMessage("Do you want to delete this task?")
-                setPositiveButton("Delete") { _,_ ->
+                setTitle(it.getString(R.string.delete_task))
+                setMessage(it.getString(R.string.delete_task_ask))
+                setPositiveButton(it.getString(R.string.delete)) { _, _ ->
                     taskViewModel.deleteTask(currentTask)
                     view?.findNavController()?.popBackStack(R.id.taskListFragment, false)
-                    Toast.makeText(context, "The task has been deleted", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, it.getString(R.string.task_deleted), Toast.LENGTH_SHORT)
+                        .show()
                 }
-                setNegativeButton("Cancel", null)
+                setNegativeButton(it.getString(R.string.cancel), null)
             }.create().show()
         }
     }

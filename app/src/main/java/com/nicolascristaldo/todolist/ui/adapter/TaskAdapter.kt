@@ -1,10 +1,8 @@
 package com.nicolascristaldo.todolist.ui.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.ColorRes
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -14,10 +12,11 @@ import com.nicolascristaldo.todolist.model.Task
 import com.nicolascristaldo.todolist.ui.fragments.TaskListFragmentDirections
 import com.nicolascristaldo.todolist.ui.providers.TaskTypeProvider
 
-class TaskAdapter: RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
-    class TaskViewHolder(val taskBinding: ItemTaskBinding): RecyclerView.ViewHolder(taskBinding.root)
+class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+    class TaskViewHolder(val taskBinding: ItemTaskBinding) :
+        RecyclerView.ViewHolder(taskBinding.root)
 
-    private val differCallBack = object: DiffUtil.ItemCallback<Task>() {
+    private val differCallBack = object : DiffUtil.ItemCallback<Task>() {
         override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
             return oldItem.id == newItem.id &&
                     oldItem.title == newItem.title &&
@@ -43,7 +42,7 @@ class TaskAdapter: RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val currentTask = differ.currentList[position]
-        val context =  holder.taskBinding.card.context
+        val context = holder.taskBinding.card.context
         val color = context.getColor(TaskTypeProvider().getTypeColor(currentTask.type).color)
         val icon = context.getDrawable(TaskTypeProvider().getTypeColor(currentTask.type).icon)
 
@@ -53,7 +52,8 @@ class TaskAdapter: RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
         holder.taskBinding.ivTaskIcon.setImageDrawable(icon)
 
         holder.itemView.setOnClickListener {
-            val direction = TaskListFragmentDirections.actionTaskListFragmentToEditTaskFragment(currentTask)
+            val direction =
+                TaskListFragmentDirections.actionTaskListFragmentToEditTaskFragment(currentTask)
             it.findNavController().navigate(direction)
         }
     }

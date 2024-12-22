@@ -15,10 +15,10 @@
             android:id="@+id/ivTaskIcon"
             android:layout_width="80dp"
             android:layout_height="100dp"
-            tools:src="@drawable/ic_personal"
-            app:tint="@color/task_icon_color"
+            android:layout_gravity="end|center_vertical"
             android:rotation="30"
-            android:layout_gravity="end|center_vertical"/>
+            app:tint="@color/task_icon_color"
+            tools:src="@drawable/ic_personal" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,18 +28,18 @@
 
             <TextView
                 android:id="@+id/tvTitle"
+                style="@style/Title_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                tools:text="title"
-                style="@style/Title_card"/>
+                tools:text="title" />
 
             <TextView
                 android:id="@+id/tvDescription"
+                style="@style/Body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="description"
-                style="@style/Body"/>
+                tools:text="description" />
 
         </LinearLayout>
 

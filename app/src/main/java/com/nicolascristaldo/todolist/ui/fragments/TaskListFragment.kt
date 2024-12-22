@@ -10,11 +10,11 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.nicolascristaldo.todolist.R
 import com.nicolascristaldo.todolist.databinding.FragmentTaskListBinding
+import com.nicolascristaldo.todolist.model.Task
 import com.nicolascristaldo.todolist.ui.MainActivity
 import com.nicolascristaldo.todolist.ui.adapter.TaskAdapter
 import com.nicolascristaldo.todolist.ui.viewmodel.TaskViewModel
 import kotlinx.coroutines.launch
-
 
 class TaskListFragment : Fragment() {
 
@@ -41,6 +41,16 @@ class TaskListFragment : Fragment() {
         initListeners()
     }
 
+    private fun updateUI(tasks: List<Task>?) {
+        if (tasks.isNullOrEmpty()) {
+            binding.emptyListCard.visibility = View.VISIBLE
+            binding.rvTasks.visibility = View.GONE
+        } else {
+            binding.emptyListCard.visibility = View.GONE
+            binding.rvTasks.visibility = View.VISIBLE
+        }
+    }
+
     private fun initListeners() {
         binding.btnAddTask.setOnClickListener {
             it.findNavController().navigate(R.id.action_taskListFragment_to_addTaskFragment)
@@ -50,7 +60,7 @@ class TaskListFragment : Fragment() {
     private fun setupHomeRecyclerView() {
         taskAdapter = TaskAdapter()
         binding.rvTasks.apply {
-            layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             setHasFixedSize(true)
             adapter = taskAdapter
         }
@@ -59,6 +69,7 @@ class TaskListFragment : Fragment() {
             activity?.let {
                 taskViewModel.getAllTasks().collect {
                     taskAdapter.differ.submitList(it)
+                    updateUI(it)
                 }
             }
         }

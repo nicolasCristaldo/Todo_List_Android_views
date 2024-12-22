@@ -6,11 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.nicolascristaldo.todolist.R
-import com.nicolascristaldo.todolist.databinding.ActivityMainBinding
 import com.nicolascristaldo.todolist.databinding.FragmentAddTaskBinding
 import com.nicolascristaldo.todolist.model.Task
 import com.nicolascristaldo.todolist.ui.MainActivity
@@ -48,7 +46,7 @@ class AddTaskFragment : Fragment() {
 
     private fun initListeners() {
         binding.btnConfirm.setOnClickListener {
-            if(saveTask()) it.findNavController().popBackStack(R.id.taskListFragment, false)
+            if (saveTask()) it.findNavController().popBackStack(R.id.taskListFragment, false)
         }
     }
 
@@ -58,7 +56,7 @@ class AddTaskFragment : Fragment() {
         val taskDescription = binding.etDescription.text.trim()
         val taskType = binding.tvType.text.trim()
 
-        if(taskTitle.isNotEmpty()) {
+        if (taskTitle.isNotEmpty()) {
             val task = Task(
                 title = taskTitle.toString(),
                 description = taskDescription.toString(),
@@ -66,10 +64,11 @@ class AddTaskFragment : Fragment() {
             )
             taskViewModel.insertTask(task)
             isTaskSaved = true
-            Toast.makeText(this.context, "Task saved", Toast.LENGTH_SHORT).show()
-        }
-        else {
-            Toast.makeText(this.context, "Please enter note title", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this.context, this.getString(R.string.task_saved), Toast.LENGTH_SHORT)
+                .show()
+        } else {
+            Toast.makeText(this.context, this.getString(R.string.enter_title), Toast.LENGTH_SHORT)
+                .show()
         }
         return isTaskSaved
     }

@@ -45,10 +45,12 @@ class MainActivity : AppCompatActivity() {
                     binding.ivArrowBack.visibility = View.VISIBLE
                     binding.tvTitle.setText(R.string.add_task)
                 }
+
                 R.id.editTaskFragment -> {
                     binding.ivArrowBack.visibility = View.VISIBLE
                     binding.tvTitle.setText(R.string.edit_task)
                 }
+
                 else -> {
                     binding.ivArrowBack.visibility = View.GONE
                     binding.tvTitle.setText(R.string.app_name)

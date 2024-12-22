@@ -11,7 +11,7 @@ import com.nicolascristaldo.todolist.model.Task
     version = 1,
     exportSchema = false
 )
-abstract class TaskDatabase: RoomDatabase() {
+abstract class TaskDatabase : RoomDatabase() {
     abstract fun taskDao(): TaskDao
 
     companion object {

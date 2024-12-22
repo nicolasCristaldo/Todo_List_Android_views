@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="16dp"
     tools:context=".ui.fragments.AddTaskFragment">
 
@@ -11,40 +11,40 @@
         android:id="@+id/tiTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:hint="@string/title"
         app:layout_constraintEnd_toEndOf="parent"
-        android:hint="Title">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/etTitle"
+            style="@style/Body"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:maxLines="1"
             android:maxLength="25"
-            style="@style/Body"/>
+            android:maxLines="1" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiType"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        app:layout_constraintTop_toBottomOf="@id/tiTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="12dp"
-        android:hint="Type">
+        android:hint="@string/type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tiTitle">
 
         <AutoCompleteTextView
             android:id="@+id/tvType"
+            style="@style/Body"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Personal"
-            style="@style/Body"
-            android:inputType="none"/>
+            android:inputType="none"
+            android:text="@string/personal" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,19 +52,19 @@
         android:id="@+id/tiDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tiType"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="12dp"
-        android:hint="Description">
+        android:hint="@string/description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiType">
 
         <EditText
             android:id="@+id/etDescription"
+            style="@style/Body"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            style="@style/Body"
-            android:maxLines="18"
-            android:maxLength="150"/>
+            android:maxLength="150"
+            android:maxLines="18" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,10 +72,10 @@
         android:id="@+id/btnConfirm"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/ic_add_task"
         android:background="@drawable/button_border"
-        app:tint="@color/button_icon_color"/>
+        android:src="@drawable/ic_add_task"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/button_icon_color" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

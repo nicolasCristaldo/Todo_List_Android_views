@@ -6,7 +6,7 @@ import com.nicolascristaldo.todolist.data.repository.TaskRepository
 
 class TaskViewModelFactory(
     private val taskRepository: TaskRepository
-): ViewModelProvider.Factory {
+) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return TaskViewModel(taskRepository) as T

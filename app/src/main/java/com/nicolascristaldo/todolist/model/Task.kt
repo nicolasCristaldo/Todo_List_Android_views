@@ -17,4 +17,4 @@ data class Task(
     val description: String,
     @ColumnInfo(name = "type")
     val type: String
-): Parcelable
+) : Parcelable
