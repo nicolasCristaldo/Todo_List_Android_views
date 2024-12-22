@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.nicolascristaldo.todolist.R
+import com.nicolascristaldo.todolist.databinding.ActivityMainBinding
 import com.nicolascristaldo.todolist.databinding.FragmentAddTaskBinding
 import com.nicolascristaldo.todolist.model.Task
 import com.nicolascristaldo.todolist.ui.MainActivity

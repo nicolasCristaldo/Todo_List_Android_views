@@ -14,9 +14,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView"
         android:background="@color/design_default_color_primary">
 
+        <ImageView
+            android:id="@+id/ivArrowBack"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_arrow_back"
+            android:layout_margin="8dp"
+            app:tint="@color/button_icon_color"
+            android:visibility="gone"/>
+
         <TextView
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

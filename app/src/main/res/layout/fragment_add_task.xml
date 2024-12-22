@@ -7,20 +7,11 @@
     android:layout_margin="16dp"
     tools:context=".ui.fragments.AddTaskFragment">
 
-    <TextView
-        android:id="@+id/tvAddTask"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="add task"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tvAddTask"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:hint="Title">
